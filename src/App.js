@@ -1,24 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import { ChakraProvider } from '@chakra-ui/react';
+import PokeList from './components/PokeList';
+import PokemonProvider from './contexts/PokemonContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PokemonProvider>
+      <ChakraProvider>
+        <div >
+          <Navbar/>
+          <div className="App">
+            <PokeList />
+          </div>
+        </div>
+      </ChakraProvider>
+    </PokemonProvider>
   );
 }
 
