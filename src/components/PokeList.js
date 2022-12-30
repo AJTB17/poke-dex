@@ -10,6 +10,8 @@ import PageControl from "./PageControl";
 const PokeList = () => {
   const { pokemons, setPokemons } = usePokemons();
   const [pokemonCount, setPokemonCount] = useState(LIMIT);
+  const [searchStatus, setSearchStatus] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     (async () => {
@@ -17,11 +19,17 @@ const PokeList = () => {
       setPokemons(data.results);
       setPokemonCount(data.count);
     })();
-  }, []);
+  }, [setPokemons, setPokemonCount]);
 
   return (
     <>
-      <SearchBar setPokemon={setPokemons} setPokemonCount={setPokemonCount} />
+      <SearchBar
+        setPokemon={setPokemons}
+        setPokemonCount={setPokemonCount}
+        setSearchStatus={setSearchStatus}
+        searchStatus={searchStatus}
+        setCurrentPage={setCurrentPage}
+      />
       <Flex
         alignItems={"center"}
         justify={"space-between"}
@@ -37,7 +45,12 @@ const PokeList = () => {
         </Flex>
         <Box />
       </Flex>
-      <PageControl pokemonCount={pokemonCount} />
+      <PageControl
+        pokemonCount={pokemonCount}
+        searchStatus={searchStatus}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };

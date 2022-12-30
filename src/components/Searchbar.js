@@ -1,19 +1,30 @@
 import { useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { searchPokemon } from "../services/api";
+import { LIMIT } from "../consts/api";
 
-const SearchBar = ({ setPokemon, setPokemonCount }) => {
+const SearchBar = ({
+  setPokemon,
+  setPokemonCount,
+  setSearchStatus,
+  setCurrentPage,
+}) => {
   const [value, setValue] = useState("");
 
   const onChange = async (evt) => {
     const newValue = evt.target.value;
-    setValue(newValue);
     const data = await searchPokemon("", "1200");
-    const filterSearch = data.results.filter((pokemon) =>
-      pokemon.name.startsWith(newValue)
-    );
+    setValue(newValue);
+
+    const isEmpty = newValue === "";
+    setSearchStatus(!isEmpty);
+    const filterSearch = isEmpty
+      ? data.results
+      : data.results.filter((pokemon) => pokemon.name.startsWith(newValue));
     setPokemon(filterSearch);
-    setPokemonCount(filterSearch.length);
+    setPokemonCount(isEmpty ? data.results.length : LIMIT);
+
+    setCurrentPage(1);
   };
 
   return (
