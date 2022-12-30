@@ -3,12 +3,14 @@ import SearchBar from "./Searchbar";
 import PokemonCard from "./PokemonCard";
 import { searchPokemon } from "../services/api";
 import { Flex, Box } from "@chakra-ui/react";
-import usePokemons from "../hooks/usePokemons";
+import { usePokemons, useModal } from "../hooks";
 import { LIMIT } from "../consts/api";
 import PageControl from "./PageControl";
 
 const PokeList = () => {
   const { pokemons, setPokemons } = usePokemons();
+  const { onOpen } = useModal();
+
   const [pokemonCount, setPokemonCount] = useState(LIMIT);
   const [searchStatus, setSearchStatus] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,7 +42,7 @@ const PokeList = () => {
         <Flex align={"center"} flexWrap={"wrap"} width={"80%"} margin={"auto"}>
           {pokemons &&
             pokemons.map((pokemon, index) => (
-              <PokemonCard key={index} pokemon={pokemon} />
+              <PokemonCard key={index} pokemon={pokemon} onClick={onOpen} />
             ))}
         </Flex>
         <Box />
