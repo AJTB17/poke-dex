@@ -11,7 +11,7 @@ const PokemonCard = ({ pokemon, onClick }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await searchPokemon(pokemon.name);
+      const data = await searchPokemon(pokemon.name, "1", 0, "pokemon");
       setPoke(data);
     })();
   }, [pokemon]);

@@ -41,7 +41,7 @@ const StatsBox = () => {
       </CardHeader>
       <CardBody>
         <ResponsiveContainer>
-          <RadarChart outerRadius={175} width="100%" height="auto" data={data}>
+          <RadarChart outerRadius="75%" width="100%" height="auto" data={data}>
             <PolarGrid />
             <PolarAngleAxis dataKey="subject" />
             <PolarRadiusAxis angle={90} domain={[0, 256]} color="red" />

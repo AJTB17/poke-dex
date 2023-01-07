@@ -18,7 +18,7 @@ const PageControl = ({
 
   const forward = async () => {
     const cantItem = currentPage * LIMIT;
-    const { results } = await searchPokemon("", "", cantItem);
+    const { results } = await searchPokemon("", "", cantItem, "pokemon");
 
     setCurrentPage((current) => current + 1);
     return setPokemons(results);

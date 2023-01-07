@@ -6,7 +6,7 @@ import { Flex, Box } from "@chakra-ui/react";
 import { usePokemons, useModal } from "../hooks";
 import { LIMIT } from "../consts/api";
 import PageControl from "./PageControl";
-import { Select } from "@chakra-ui/react";
+import PokemonTypeFilter from "./PokemonTypeFilter";
 
 const PokeList = () => {
   const { pokemons, setPokemons } = usePokemons();
@@ -15,9 +15,6 @@ const PokeList = () => {
   const [pokemonCount, setPokemonCount] = useState(LIMIT);
   const [searchStatus, setSearchStatus] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filter, setFilter] = useState("Filter");
-
-  const filterForm = (evt) => setFilter(evt.target.value);
 
   useEffect(() => {
     (async () => {
@@ -35,13 +32,12 @@ const PokeList = () => {
         setSearchStatus={setSearchStatus}
         searchStatus={searchStatus}
         setCurrentPage={setCurrentPage}
-        filter={filter}
       />
       <Box>
-        <Select placeholder="Filter" variant="flushed" onChange={filterForm}>
-          <option value="-mega">Mega evolution</option>
-          <option value="-gmax">Dinamax</option>
-        </Select>
+        <PokemonTypeFilter
+          setPokemonCount={setPokemonCount}
+          setCurrentPage={setCurrentPage}
+        />
       </Box>
       <Flex
         alignItems={"center"}

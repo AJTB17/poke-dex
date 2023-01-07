@@ -5,7 +5,7 @@ export const typeColorsBackground = {
   water: "rgb(15,100,250)",
   flying: "rgb(30,190,225)",
   fighting: "brown",
-  poison: "rgb(125,25,185)",
+  poison: "rgb(195,15,185)",
   electric: "gold",
   ground: "rgb(225,130,50)",
   rock: "rgb(225,150,90)",
@@ -36,6 +36,6 @@ export const typeColorsTag = {
   ghost: "purple",
   steel: "gray",
   dragon: "blue",
-  dark: "black",
+  dark: "gray",
   fairy: "pink",
 };

@@ -13,9 +13,7 @@ const SearchBar = ({
   const [value, setValue] = useState("");
 
   const onChangeSearch = async () => {
-    const data = await searchPokemon("", "1200");
-
-    const isFilter = filter !== "Filter";
+    const data = await searchPokemon("", "1200", 0, "pokemon");
     const isEmpty = value === "";
 
     setSearchStatus(!isEmpty);
@@ -24,11 +22,6 @@ const SearchBar = ({
       : data.results.filter((pokemon) =>
           pokemon.name.startsWith(value.toLowerCase())
         );
-    const secondFilterSearch =
-      isFilter &&
-      filterSearch.filter((pokemon) => {
-        return pokemon.name.includes(filter);
-      });
 
     setPokemon(filterSearch);
     setPokemonCount(isEmpty ? data.results.length : LIMIT);
