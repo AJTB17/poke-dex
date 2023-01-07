@@ -8,19 +8,28 @@ const SearchBar = ({
   setPokemonCount,
   setSearchStatus,
   setCurrentPage,
+  filter,
 }) => {
   const [value, setValue] = useState("");
 
   const onChangeSearch = async () => {
     const data = await searchPokemon("", "1200");
 
+    const isFilter = filter !== "Filter";
     const isEmpty = value === "";
+
     setSearchStatus(!isEmpty);
     const filterSearch = isEmpty
       ? data.results.slice(0, 20)
       : data.results.filter((pokemon) =>
           pokemon.name.startsWith(value.toLowerCase())
         );
+    const secondFilterSearch =
+      isFilter &&
+      filterSearch.filter((pokemon) => {
+        return pokemon.name.includes(filter);
+      });
+
     setPokemon(filterSearch);
     setPokemonCount(isEmpty ? data.results.length : LIMIT);
 
@@ -34,17 +43,15 @@ const SearchBar = ({
 
   return (
     <div>
-      <div>
-        <Input
-          variant="flushed"
-          placeholder="Buscar pokemon..."
-          onChange={(evt) => setValue(evt.target.value)}
-          size="lg"
-          height="100px"
-          padding="0 10px"
-          value={value}
-        />
-      </div>
+      <Input
+        variant="flushed"
+        placeholder="Buscar pokemon..."
+        onChange={(evt) => setValue(evt.target.value)}
+        size="lg"
+        height="100px"
+        padding="0 10px"
+        value={value}
+      />
     </div>
   );
 };

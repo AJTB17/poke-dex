@@ -20,6 +20,32 @@ const PokemonCard = ({ pokemon, onClick }) => {
     setSelectedPokemon(poke);
     onClick();
   };
+
+  const printUpperCaseName = () => {
+    const mote = poke.name.split("-");
+    const reOrderMote = [];
+    const searchForTransformation = mote.findIndex(
+      (word) => word === "mega" || word === "gmax"
+    );
+    const isTransform = searchForTransformation !== -1;
+    const selectionArray = isTransform ? reOrderMote : mote;
+
+    mote.map((element, index) => {
+      if (element === "mega" || element === "gmax") {
+        mote.splice(index, 1);
+
+        reOrderMote.push(element);
+        mote.map((elt) => reOrderMote.push(elt));
+      }
+    });
+
+    const upperCaseWords = selectionArray.map(
+      (word) => word[0].toUpperCase() + word.slice(1)
+    );
+
+    const joinedString = upperCaseWords.join(" ");
+    return joinedString;
+  };
   return (
     <Box
       margin={"10px"}
@@ -45,7 +71,7 @@ const PokemonCard = ({ pokemon, onClick }) => {
               margin={"auto"}
             />
             <Heading size="md" textAlign={"center"}>
-              {poke.name}
+              {printUpperCaseName()}
             </Heading>
             <Flex justifyContent={"center"}>
               <PokemonTypeTag poke={poke} size="md" />
