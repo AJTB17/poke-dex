@@ -1,30 +1,9 @@
 import React from "react";
-import { Card, CardBody, Image, Heading, Flex, Box } from "@chakra-ui/react";
-import { Tag } from "@chakra-ui/react";
+import { Card, CardBody, Image, Heading, Box, Flex } from "@chakra-ui/react";
 import { searchPokemon } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useModal } from "../../hooks";
-
-const typeColors = {
-  grass: "green",
-  normal: "gray",
-  fire: "red",
-  water: "blue",
-  flying: "teal",
-  fighting: "orange",
-  poison: "pink",
-  electric: "yellow",
-  ground: "orange",
-  rock: "orange",
-  psychic: "pink",
-  ice: "cyan",
-  bug: "green",
-  ghost: "purple",
-  steel: "gray",
-  dragon: "Blue",
-  dark: "black",
-  fairy: "pink",
-};
+import PokemonTypeTag from "../PokemonTypeTag";
 
 const PokemonCard = ({ pokemon, onClick }) => {
   const [poke, setPoke] = useState();
@@ -69,18 +48,7 @@ const PokemonCard = ({ pokemon, onClick }) => {
               {poke.name}
             </Heading>
             <Flex justifyContent={"center"}>
-              {poke.types.map((type, index) => {
-                const { name } = type.type;
-                return (
-                  <Tag
-                    variant="solid"
-                    key={index}
-                    colorScheme={typeColors[name]}
-                  >
-                    {name}
-                  </Tag>
-                );
-              })}
+              <PokemonTypeTag poke={poke} size="md" />
             </Flex>
           </CardBody>
         </Card>

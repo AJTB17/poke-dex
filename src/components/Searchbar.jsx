@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@chakra-ui/react";
 import { searchPokemon } from "../services/api";
 import { LIMIT } from "../consts/api";
@@ -11,21 +11,26 @@ const SearchBar = ({
 }) => {
   const [value, setValue] = useState("");
 
-  const onChange = async (evt) => {
-    const newValue = evt.target.value;
+  const onChangeSearch = async () => {
     const data = await searchPokemon("", "1200");
-    setValue(newValue);
 
-    const isEmpty = newValue === "";
+    const isEmpty = value === "";
     setSearchStatus(!isEmpty);
     const filterSearch = isEmpty
-      ? data.results
-      : data.results.filter((pokemon) => pokemon.name.startsWith(newValue));
+      ? data.results.slice(0, 20)
+      : data.results.filter((pokemon) =>
+          pokemon.name.startsWith(value.toLowerCase())
+        );
     setPokemon(filterSearch);
     setPokemonCount(isEmpty ? data.results.length : LIMIT);
 
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    const timeOutId = setTimeout(onChangeSearch, 500);
+    return () => clearTimeout(timeOutId);
+  }, [value]);
 
   return (
     <div>
@@ -33,7 +38,7 @@ const SearchBar = ({
         <Input
           variant="flushed"
           placeholder="Buscar pokemon..."
-          onChange={onChange}
+          onChange={(evt) => setValue(evt.target.value)}
           size="lg"
           height="100px"
           padding="0 10px"

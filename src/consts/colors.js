@@ -1,4 +1,4 @@
-export const typeColors = {
+export const typeColorsBackground = {
   grass: "rgb(15,200,15)",
   normal: "gray",
   fire: "rgb(200,15,15)",
@@ -16,5 +16,26 @@ export const typeColors = {
   steel: "gray",
   dragon: "rgb(40,40,255)",
   dark: "rgb(70,55,45)",
+  fairy: "pink",
+};
+
+export const typeColorsTag = {
+  grass: "green",
+  normal: "gray",
+  fire: "red",
+  water: "blue",
+  flying: "teal",
+  fighting: "orange",
+  poison: "pink",
+  electric: "yellow",
+  ground: "orange",
+  rock: "orange",
+  psychic: "pink",
+  ice: "cyan",
+  bug: "green",
+  ghost: "purple",
+  steel: "gray",
+  dragon: "blue",
+  dark: "black",
   fairy: "pink",
 };
