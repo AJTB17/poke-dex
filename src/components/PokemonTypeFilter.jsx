@@ -68,7 +68,7 @@ const PokemonTypeFilter = ({ setPokemonCount, setCurrentPage }) => {
   };
 
   useEffect(() => {
-    if (value.length !== 0 && value[0] === "vacio") OnChangeSearch();
+    OnChangeSearch();
   }, [value]);
 
   return (
